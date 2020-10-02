@@ -101,17 +101,20 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Kriterium</span>
+                                <i class="fa fa-desktop"></i> <span>Kriteria</span>
                             </a>
                             <ul class="treeview-menu">
-								<li class="active">
-                                    <a href="<?php echo site_url('kriterium/add'); ?>"><i class="fa fa-plus"></i> Add</a>
-                                </li>
 								<li>
                                     <a href="<?php echo site_url('kriterium/index'); ?>"><i class="fa fa-list-ul"></i> Listing</a>
                                 </li>
                                 <li class="active">
                                     <a href="<?php echo site_url('kriterium/bobot'); ?>"><i class="fa fa-plus"></i> Bobot Kriteria</a>
+                                </li>
+                                <li class="active">
+                                    <a href="<?php echo site_url('subkriteria/index'); ?>"><i class="fa fa-plus"></i> sub Kriteria</a>
+                                </li>
+                                <li class="active">
+                                    <a href="<?php echo site_url('subkriteria/index'); ?>"><i class="fa fa-plus"></i> sub Kriteria</a>
                                 </li>
 							</ul>
                         </li>

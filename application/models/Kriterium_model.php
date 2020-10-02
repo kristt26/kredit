@@ -97,4 +97,22 @@ class Kriterium_model extends CI_Model
     {
         return $this->db->delete('kriteria', array('idkriteria' => $idkriteria));
     }
+
+    public function insert($params)
+    {
+        $this->db->insert('kriteria', $params);
+        $params['idkriteria'] = $this->db->insert_id();
+        return $params;
+    }
+
+    public function update($params)
+    {
+        $item = [
+            'kriteria' => $params['kriteria'],
+        ];
+        $this->db->where('idkriteria', $params['idkriteria']);
+        $this->db->update('kriteria', $item);
+        $params['idkriteria'] = $this->db->insert_id();
+        return $params;
+    }
 }
