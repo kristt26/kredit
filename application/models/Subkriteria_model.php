@@ -9,6 +9,7 @@ class Subkriteria_model extends CI_Model
     {
         parent::__construct();
         $this->load->model('Periode_model');
+        $this->load->model('Nasabah_model');
 
     }
 
@@ -32,7 +33,8 @@ class Subkriteria_model extends CI_Model
                 $value->value = $this->db->get_where('pembobotan', ['idperiode' => $periode['idperiode'], 'idnasabah' => $value->idnasabah])->result();
             }
         }
-        return ['subkriteria' => $kriteria, 'bobot' => $bobot, 'alternatif' => $alternatif];
+        $nasabah = $this->Nasabah_model->get_all_nasabah();
+        return ['subkriteria' => $kriteria, 'bobot' => $bobot, 'alternatif' => $alternatif, 'nasabah'=>$nasabah];
     }
 
     public function selectlaporan($idperiode)

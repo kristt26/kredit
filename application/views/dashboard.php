@@ -1,5 +1,7 @@
 <div class="containerr text-center">
+    
     <h2 class="box-title">
-                SISTEM PENDUKUNG KEKUPUTUSAN <BR> KELAYANAKAN PENERIMA KREDIT
+        <img src="<?= base_url('resources/img/logom.png')?>" width="200px" alt=""> <br>
+                SISTEM PENDUKUNG KEPUTUSAN <BR> PENENTUAN KREDIT PINJAMAN
                 </h2>
 </div>

@@ -332,6 +332,8 @@
         $scope.btnSimpan = false;
         PeriodeService.getPeriodeAktif().then((periode) => {
             SubKriteriaService.get().then(x => {
+                $scope.nasabahs = x.nasabah;
+                $scope.kriteria = x.subkriteria;
                 if (x.alternatif.length == 0) {
                     $scope.datatampung = x.subkriteria
                     $scope.nextnilai();

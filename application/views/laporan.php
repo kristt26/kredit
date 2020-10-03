@@ -13,7 +13,7 @@
                     <div id="print">
                         <div class="screen">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <div class="col-md-4"><img src="<?=base_url('resources/img/logoo.png');?>" width="100px"></div>
+                                <div class="col-md-4"><img src="<?=base_url('resources/img/logom.png');?>" width="100px"></div>
                                 <div class="col-md-4 text-center"><h3>LAPORAN <br>HASIL ANALISA AHP</h3></div>
                                 <div class="col-md-4">&nbsp;</div>
                             </div>
@@ -34,7 +34,7 @@
                                         <td>{{$index+1}}</td>
                                         <td>{{item.nama}}</td>
                                         <td>{{sumTotal(item.value) | limitTo: 8}}</td>
-                                        <td>{{item.hasil>=0.5 ? 'Layak':''}}</td>
+                                        <td>{{item.hasil>=0.5 ? 'Layak':'Tidak Layak'}}</td>
                                     </tr>
                                 </tbody>
                             </table>
