@@ -22,25 +22,13 @@
         <link rel="stylesheet" href="<?php echo site_url('resources/css/style.css'); ?>">
         <style>
             .containerr {
-            height: 200px;
-            position: relative;
+                display: flex;
+                height: 90vh;
+                justify-content: center;
+                align-items: center;
+                
             }
-            .horizon-centerr {
-                margin: 0;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                -ms-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-            }
-
-            .vertical-centerr {
-            margin: 0;
-            position: absolute;
-            top: 50%;
-            -ms-transform: translateY(-50%);
-            transform: translateY(-50%);
-            }
+         
             @media screen {
                 #print {
                     font-family:verdana, arial, sans-serif;
