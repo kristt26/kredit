@@ -181,7 +181,7 @@
                                 </li>
 							</ul>
                         </li>
-						<li>
+						<!-- <li>
                             <a href="#">
                                 <i class="fa fa-user"></i> <span>User</span>
                             </a>
@@ -193,7 +193,7 @@
                                     <a href="<?php echo site_url('user/index'); ?>"><i class="fa fa-list-ul"></i> Listing</a>
                                 </li>
 							</ul>
-                        </li>
+                        </li> -->
                         <li>
                                     <a href="<?php echo site_url('laporan/index'); ?>">
                                         <i class="fa fa-file"></i> <span>Laporan</span>
