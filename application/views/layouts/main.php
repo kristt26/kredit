@@ -20,6 +20,43 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo site_url('resources/css/_all-skins.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo site_url('resources/css/style.css'); ?>">
+        <style>
+            .containerr {
+            height: 200px;
+            position: relative;
+            }
+            .horizon-centerr {
+                margin: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+
+            .vertical-centerr {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            }
+            @media screen {
+                #print {
+                    font-family:verdana, arial, sans-serif;
+                }
+                .screen{
+                    display:none;
+                }
+            }
+
+            @media print {
+                #print {font-family:georgia, times, serif;}
+                .screen{
+                    display:block;
+                }
+            }
+        </style>
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
@@ -29,7 +66,7 @@
                 <a href="" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini">
-                        <img src="<?php echo site_url('resources/img/LOGO-PDAM.png'); ?>" width="100%" alt="">
+                        <img src="<?php echo site_url('resources/img/LOGO-PDAMm.png'); ?>" width="100%" alt="">
                     </span>
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg">SPK</span>
@@ -47,13 +84,12 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                         <!-- User Account: style can be found in dropdown.less -->
-                            <li class="dropdown user user-menu">
+                            <!-- <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="<?php echo site_url('resources/img/user2-160x160.jpg'); ?>" class="user-image" alt="User Image">
                                     <span class="hidden-xs">Alexander Pierce</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <!-- User image -->
                                     <li class="user-header">
                                         <img src="<?php echo site_url('resources/img/user2-160x160.jpg'); ?>" class="img-circle" alt="User Image">
 
@@ -62,7 +98,6 @@
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                     </li>
-                                    <!-- Menu Footer-->
                                     <li class="user-footer">
                                         <div class="pull-left">
                                             <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -72,7 +107,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </nav>
@@ -82,7 +117,7 @@
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
-                    <div class="user-panel">
+                    <!-- <div class="user-panel">
                         <div class="pull-left image">
                             <img src="<?php echo site_url('resources/img/user2-160x160.jpg'); ?>" class="img-circle" alt="User Image">
                         </div>
@@ -90,7 +125,7 @@
                             <p>Alexander Pierce</p>
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="header">MAIN NAVIGATION</li>
@@ -105,16 +140,13 @@
                             </a>
                             <ul class="treeview-menu">
 								<li>
-                                    <a href="<?php echo site_url('kriterium/index'); ?>"><i class="fa fa-list-ul"></i> Listing</a>
+                                    <a href="<?php echo site_url('kriterium/index'); ?>"><i class="fa fa-list-ul"></i> Data Kriteria</a>
                                 </li>
                                 <li class="active">
                                     <a href="<?php echo site_url('kriterium/bobot'); ?>"><i class="fa fa-plus"></i> Bobot Kriteria</a>
                                 </li>
                                 <li class="active">
-                                    <a href="<?php echo site_url('subkriteria/index'); ?>"><i class="fa fa-plus"></i> sub Kriteria</a>
-                                </li>
-                                <li class="active">
-                                    <a href="<?php echo site_url('subkriteria/index'); ?>"><i class="fa fa-plus"></i> sub Kriteria</a>
+                                    <a href="<?php echo site_url('subkriteria/index'); ?>"><i class="fa fa-plus"></i> Sub Kriteria</a>
                                 </li>
 							</ul>
                         </li>
@@ -133,14 +165,14 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Karyawan</span>
+                                <i class="fa fa-desktop"></i> <span>Nasabah</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
-                                    <a href="<?php echo site_url('karyawan/add'); ?>"><i class="fa fa-plus"></i> Add</a>
+                                    <a href="<?php echo site_url('nasabah/add'); ?>"><i class="fa fa-plus"></i> Add</a>
                                 </li>
 								<li>
-                                    <a href="<?php echo site_url('karyawan/index'); ?>"><i class="fa fa-list-ul"></i> Listing</a>
+                                    <a href="<?php echo site_url('nasabah/index'); ?>"><i class="fa fa-list-ul"></i> Listing</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo site_url('analisa/index'); ?>">
@@ -163,7 +195,7 @@
 							</ul>
                         </li>
                         <li>
-                                    <a href="<?php echo site_url('analisa/index'); ?>">
+                                    <a href="<?php echo site_url('laporan/index'); ?>">
                                         <i class="fa fa-file"></i> <span>Laporan</span>
                                     </a>
                                 </li>
@@ -197,7 +229,10 @@ if (isset($_view) && $_view) {
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
-                <strong>Generated By <a href="http://www.crudigniter.com/">CRUDigniter</a> 3.2</strong>
+                <div class="pull-right hidden-xs">
+                    Metode AHP
+                </div>
+                <strong>SPK Pemilihan Teknisi Terbaik</strong>
             </footer>
 
             <!-- Control Sidebar -->
@@ -246,6 +281,7 @@ if (isset($_view) && $_view) {
         <script src="<?php echo site_url('resources/js/moment.js'); ?>"></script>
         <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js'); ?>"></script>
         <script src="<?php echo site_url('resources/js/global.js'); ?>"></script>
+        <script src="<?php echo site_url('resources/js/jquery.PrintArea.js'); ?>"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>

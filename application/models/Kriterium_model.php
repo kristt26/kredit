@@ -81,6 +81,90 @@ class Kriterium_model extends CI_Model
         }
     }
 
+    public function addkriteria($params)
+    {
+        $result = $this->db->insert("kriteria", $params);
+        $params['idkriteria'] = $this->db->insert_id();
+        return $params;
+    }
+
+    public function updatekriteria($params)
+    {
+        $item = [
+            'kriteria'=>$params['kriteria']
+        ];
+        $this->db->where('idkriteria', $params['idkriteria']);
+        $this->db->update('kriteria', $item);
+        return $params;
+    }
+
+    public function add_nilai($params)
+    {
+        $periode = $this->Periode_model->get_periodeaktif();
+        $this->db->trans_begin();
+        foreach ($params['kriteria'] as $key => $value) {
+            foreach ($value['item'] as $key1 => $value1) {
+                $a = $value1;
+                $item = [
+                    'idnasabah'=>$value1['alternatif']['idnasabah'],
+                    'idnasabah1'=>$value1['alternatif1']['idnasabah'],
+                    'idperiode'=>$periode['idperiode'],
+                    'bobot'=>$value1['nilai'],
+                    'idkriteria'=>$value['idkriteria']
+                ];
+                $this->db->insert('pembobotan', $item);
+            }
+        }
+        foreach ($params['alternatif'] as $key => $value) {
+            $item = [
+                'idperiode'=>$periode['idperiode'],
+                'idnasabah'=>$value['idnasabah'],
+            ];
+            $this->db->insert('detailnasabah', $item);
+        }
+        if($this->db->trans_status()){
+            $this->db->trans_commit();
+            return true;
+        }else{
+            $this->db->trans_rollback();
+            return false;
+        }
+    }
+
+    public function get_nilai($idperiode = null)
+    {
+        if($idperiode == null){
+            $periode = $this->Periode_model->get_periodeaktif();
+            return $this->db->get_where('pembobotan', ['idperiode'=>$periode['idperiode']])->result();
+        }else{
+            $periode = $this->Periode_model->get_periode($idperiode);
+            return $this->db->get_where('pembobotan', ['idperiode'=>$periode['idperiode']])->result();
+        }
+        
+    }
+
+    public function getalternatif($idperiode = null)
+    {
+        if($idperiode == null){
+            $periode = $this->Periode_model->get_periodeaktif()['idperiode'];
+            return $this->db->query("SELECT
+                `nasabah`.*
+            FROM
+                `detailnasabah`
+                LEFT JOIN `nasabah` ON
+                `nasabah`.`idnasabah` = `detailnasabah`.`idnasabah` WHERE idperiode='$periode'")->result();
+        }else{
+            $periode = $this->Periode_model->get_periode($idperiode)['idperiode'];
+            return $this->db->query("SELECT
+                `nasabah`.*
+            FROM
+                `detailnasabah`
+                LEFT JOIN `nasabah` ON
+                `nasabah`.`idnasabah` = `detailnasabah`.`idnasabah` WHERE idperiode='$periode'")->result();
+        }
+        
+    }
+
     /*
      * function to update kriterium
      */
@@ -96,23 +180,5 @@ class Kriterium_model extends CI_Model
     public function delete_kriterium($idkriteria)
     {
         return $this->db->delete('kriteria', array('idkriteria' => $idkriteria));
-    }
-
-    public function insert($params)
-    {
-        $this->db->insert('kriteria', $params);
-        $params['idkriteria'] = $this->db->insert_id();
-        return $params;
-    }
-
-    public function update($params)
-    {
-        $item = [
-            'kriteria' => $params['kriteria'],
-        ];
-        $this->db->where('idkriteria', $params['idkriteria']);
-        $this->db->update('kriteria', $item);
-        $params['idkriteria'] = $this->db->insert_id();
-        return $params;
     }
 }

@@ -20,7 +20,41 @@ class Subkriteria_model extends CI_Model
         }
         $periode = $this->Periode_model->get_periodeaktif();
         $bobot = $this->db->get_where('bobotsubkriteria', ['idperiode' => $periode['idperiode']])->result();
-        return ['subkriteria' => $kriteria, 'bobot' => $bobot];
+        $idperiode = $periode['idperiode'];
+        $alternatif = $this->db->query("SELECT
+            `nasabah`.*
+        FROM
+            `detailnasabah`
+            LEFT JOIN `nasabah` ON `detailnasabah`.`idnasabah` = `nasabah`.`idnasabah` WHERE idperiode = $idperiode")->result();
+
+        if (count($alternatif) > 0) {
+            foreach ($alternatif as $key => $value) {
+                $value->value = $this->db->get_where('pembobotan', ['idperiode' => $periode['idperiode'], 'idnasabah' => $value->idnasabah])->result();
+            }
+        }
+        return ['subkriteria' => $kriteria, 'bobot' => $bobot, 'alternatif' => $alternatif];
+    }
+
+    public function selectlaporan($idperiode)
+    {
+        $kriteria = $this->db->get('kriteria')->result();
+        foreach ($kriteria as $key => $value) {
+            $value->subkriteria = $this->db->get_where('subkriteria', ['idkriteria' => $value->idkriteria])->result();
+        }
+        $bobot = $this->db->get_where('bobotsubkriteria', ['idperiode' => $idperiode])->result();
+        $idperiode = $idperiode;
+        $alternatif = $this->db->query("SELECT
+            `nasabah`.*
+        FROM
+            `detailnasabah`
+            LEFT JOIN `nasabah` ON `detailnasabah`.`idnasabah` = `nasabah`.`idnasabah` WHERE idperiode = $idperiode")->result();
+
+        if (count($alternatif) > 0) {
+            foreach ($alternatif as $key => $value) {
+                $value->value = $this->db->get_where('pembobotan', ['idperiode' => $idperiode, 'idnasabah' => $value->idnasabah])->result();
+            }
+        }
+        return ['subkriteria' => $kriteria, 'bobot' => $bobot, 'alternatif' => $alternatif];
     }
 
     public function insert($params)

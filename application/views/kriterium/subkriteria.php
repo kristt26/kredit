@@ -42,7 +42,7 @@
       </div>
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_2">
-        <div>
+        <div ng-show="bobot">
           <div class="col-md-6" ng-repeat="itemkriteria in datas" style="margin-top:12px">
             <div class="box-header">
               <h4 class="box-title">{{itemkriteria.kriteria}}</h4>
@@ -187,11 +187,56 @@
               </table>
             </div>
           </div>
+          <div class="col-md-12">
+            <button class="btn btn-warning" ng-click="checkcr()">Check CR</button>
+            <button class="btn btn-primary" ng-click="simpanbobot()">Simpan</button>
+          </div>
         </div>
-
-        <div class="col-md-12">
-          <button class="btn btn-warning" ng-click="checkcr()">Check CR</button>
-          <button class="btn btn-primary" ng-click="simpanbobot()">Simpan</button>
+        <div ng-show="!bobot">
+          <div class="col-md-6" ng-repeat="itemkriteria in nilai.datahitung" style="margin-top:12px">
+            <div class="box-header">
+              <h4 class="box-title">{{itemkriteria.name}}</h4>
+            </div>
+            <div class="box table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <td>{{itemkriteria.name}}</td>
+                    <td ng-repeat="item in itemkriteria.sub">
+                      {{item.subkriteria}}
+                    </td>
+                    <td>Priority</td>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="bobot1 in itemkriteria.matrix">
+                  <tr>
+                    <td>
+                      {{itemkriteria.sub[$index].subkriteria}}
+                    </td>
+                    <td ng-repeat="item in bobot1">
+                      {{item}}
+                    </td>
+                    <td>
+                      {{itemkriteria.eigen[$index]}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible" ng-show="itemkriteria.cr<0.1">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-check"></i>Nilai CR: {{itemkriteria.cr}} (Konsisten)
+                  </h4>
+                </div>
+                <div class="alert alert-danger alert-dismissible" ng-show="itemkriteria.cr>0.1">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h4><i class="icon fa fa-ban"></i>Nilai CR: {{itemkriteria.cr}} (Tidak
+                    Konsisten)
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- /.tab-pane -->

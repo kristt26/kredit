@@ -21,6 +21,7 @@ class Ahp
     public $Subconcistencybobot = [];
     public $bobomatrix = [];
     public $alternativeMatrix = [];
+    public $dataSub = [];
     public $CR;
     public static $ir = [
         0.00,
@@ -174,6 +175,7 @@ class Ahp
 
     public function setSubkriteria($kriteria)
     {
+        $this->dataSub = $kriteria;
         foreach ($kriteria as $key => $value) {
             $b = 0;
             $items[$value['kriteria']] = [];
@@ -398,9 +400,23 @@ class Ahp
         // $criteria_name;
         $this->rawSubCriteria[$criteria_name] = $matrix;
         $this->subCriteriaPairWise[$criteria_name] = $this->normalizeRelativeInterestMatrixAndCountEigen($matrix);
+        $this->subCriteriaPairWise[$criteria_name]['sub'] = $this->setSub($criteria_name);
         $do = $this->setSubPrioritiVektor($matrix, $this->subCriteriaPairWise[$criteria_name]['eigen']);
         $this->subCriteriaPairWise[$criteria_name]['cr'] = $this->subconcistencyCheck($do, $this->subCriteriaPairWise[$criteria_name]['eigen']);
         return $this;
+    }
+
+    public function setSub($criteria_name)
+    {
+        $set = [];
+        foreach ($this->dataSub as $key => $value) {
+            if ($criteria_name == $value['kriteria']) {
+                foreach ($value['subkriteria'] as $key1 => $value1) {
+                    array_push($set, $value1);
+                }
+            }
+        }
+        return $set;
     }
 
     public function setSubPrioritiVektor($matrix, $eigen)

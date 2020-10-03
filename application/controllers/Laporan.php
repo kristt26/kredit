@@ -4,7 +4,7 @@
  * www.crudigniter.com
  */
 
-class Analisa extends CI_Controller
+class Laporan extends CI_Controller
 {
     public function __construct()
     {
@@ -13,7 +13,6 @@ class Analisa extends CI_Controller
         $this->load->model('Bobotkriterium_model');
         $this->load->model('Nasabah_model');
         $this->load->model('Kriterium_model');
-        $this->load->model('Periode_model');
         $this->load->library('ahp');
     }
 
@@ -23,8 +22,8 @@ class Analisa extends CI_Controller
     public function index()
     {
         // $data['pembobotan'] = $this->Pembobotan_model->get_all_pembobotan();
-        $data['data'] = ['title' => 'Analisa', 'header' => 'Analisa AHP'];
-        $data['_view'] = 'pembobotan/index';
+        $data['data'] = ['title' => 'Laporan', 'header' => 'Cetak Laporan'];
+        $data['_view'] = 'laporan';
         $this->load->view('layouts/main', $data);
     }
 
@@ -47,7 +46,7 @@ class Analisa extends CI_Controller
         }
     }
 
-    public function addnilai()
+    function addnilai()
     {
         $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
         $result = $this->Kriterium_model->add_nilai($params);
@@ -56,27 +55,11 @@ class Analisa extends CI_Controller
 
     public function getnasabah()
     {
-        $data['nasabah'] = $this->Nasabah_model->get_all_nasabah();
+        $data['nasabah'] = $this->nasabah_model->get_all_nasabah();
         $data['kriteria'] = $this->Kriterium_model->get_all_kriteria();
         $data['bobot'] = $this->Kriterium_model->get_nilai();
         $data['alternatif'] = $this->Kriterium_model->getalternatif();
-        $data['periode'] = $this->Periode_model->get_all_periode();
-        echo json_encode($data);
-    }
-
-    public function simpananalisa()
-    {
-        $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        $result = $this->Pembobotan_model->add_analisa($params);
-        echo json_encode($result);
-    }
-
-    public function getLaporan($idperiode = null)
-    {
-        $data['nasabah'] = $this->Nasabah_model->get_all_nasabah();
-        $data['kriteria'] = $this->Kriterium_model->get_all_kriteria();
-        $data['bobot'] = $this->Kriterium_model->get_nilai($idperiode);
-        $data['alternatif'] = $this->Kriterium_model->getalternatif($idperiode);
+        
         echo json_encode($data);
     }
 

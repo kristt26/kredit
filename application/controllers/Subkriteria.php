@@ -26,6 +26,12 @@ class Subkriteria extends CI_Controller
         echo json_encode($result);
     }
 
+    public function getlaporan($id = null)
+    {
+        $result = $this->Subkriteria_model->selectlaporan($id);
+        echo json_encode($result);
+    }
+
     public function add()
     {
         $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);

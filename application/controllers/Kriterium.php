@@ -20,14 +20,10 @@ class Kriterium extends CI_Controller
      */
     public function index()
     {
-        $data['data'] = ['title' => 'Bobot Kriteria', 'header' => 'Pembobotan'];
+        $data['kriteria'] = $this->Kriterium_model->get_all_kriteria();
+        $data['data'] = ['title' => 'Kriteria', 'header' => 'kriteria'];
         $data['_view'] = 'kriterium/index';
         $this->load->view('layouts/main', $data);
-    }
-
-    public function getdata()
-    {
-        $data['kriteria'] = $this->Kriterium_model->get_all_kriteria();
     }
 
     /*
@@ -40,21 +36,44 @@ class Kriterium extends CI_Controller
         echo json_encode(['message' => $result]);
     }
 
-    public function simpankriteria()
+    function addkriteria()
     {
         $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        $result = $this->Kriterium_model->insert($params);
+        $result = $this->Kriterium_model->addkriteria($params);
         echo json_encode($result);
+    }
+
+    function editkriteria()
+    {
+        $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
+        $result = $this->Kriterium_model->updatekriteria($params);
+        echo json_encode(['message' => $result]);
     }
 
     /*
      * Editing a kriterium
      */
-    public function edit()
+    public function edit($idkriteria)
     {
-        $params = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-        $result = $this->Kriterium_model->update($params);
-        echo json_encode($result);
+        // check if the kriterium exists before trying to edit it
+        $data['kriterium'] = $this->Kriterium_model->get_kriterium($idkriteria);
+
+        if (isset($data['kriterium']['idkriteria'])) {
+            if (isset($_POST) && count($_POST) > 0) {
+                $params = array(
+                    'kriteria' => $this->input->post('kriteria'),
+                );
+
+                $this->Kriterium_model->update_kriterium($idkriteria, $params);
+                redirect('kriterium/index');
+            } else {
+                $data['_view'] = 'kriterium/edit';
+                $this->load->view('layouts/main', $data);
+            }
+        } else {
+            show_error('The kriterium you are trying to edit does not exist.');
+        }
+
     }
 
     /*
@@ -67,10 +86,11 @@ class Kriterium extends CI_Controller
         // check if the kriterium exists before trying to delete it
         if (isset($kriterium['idkriteria'])) {
             $this->Kriterium_model->delete_kriterium($idkriteria);
-            redirect('kriterium/index');
+            echo json_encode(['message'=>true]);
         } else {
-            show_error('The kriterium you are trying to delete does not exist.');
+            echo json_encode(['message'=>false]);
         }
+
     }
 
     public function bobot()
