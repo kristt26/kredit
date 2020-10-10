@@ -13,7 +13,7 @@
 						<th width="5%">No</th>
 						<th>Periode</th>
 						<th width="10%">Status</th>
-						<th width="10%">Actions</th>
+						<th width="15%">Actions</th>
                     </tr>
                     <?php foreach($periode as $key => $p){ ?>
                     <tr>
@@ -22,7 +22,7 @@
 						<td><?php echo $p['status']=='true' ? 'AKTIF':'TIDAK AKTIF'; ?></td>
 						<td>
                             <a href="<?php echo site_url('periode/edit/'.$p['idperiode']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
-                            <a href="<?php echo site_url('periode/remove/'.$p['idperiode']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                            <!-- <a href="<?php echo site_url('periode/remove/'.$p['idperiode']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a> -->
                         </td>
                     </tr>
                     <?php } ?>

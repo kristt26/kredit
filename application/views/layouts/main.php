@@ -23,11 +23,10 @@
         <style>
             .containerr {
                 display: flex;
-                height: 80vh;
+                height: 60vh;
                 justify-content: center;
                 align-items: center;
                 direction: row;
-
             }
          
             @media screen {
@@ -187,6 +186,9 @@
                 </section>
                 <section class="content">
                     <?php
+                    if(!$this->session->userdata('username')){
+                        redirect('auth');
+                    }
 if (isset($_view) && $_view) {
     $this->load->view($_view);
 }

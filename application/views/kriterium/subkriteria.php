@@ -2,7 +2,7 @@
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
       <li class="active"><a href="" data-toggle="tab" data-target="#tab_1">Data Sub Kriteria</a></li>
-      <li><a href="#tab_2" data-toggle="tab" data-target="#tab_2">Bobot Sub Kriteria</a></li>
+      <li><a href="" data-toggle="tab" data-target="#tab_2">Bobot Sub Kriteria</a></li>
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="tab_1">
@@ -43,7 +43,7 @@
       <!-- /.tab-pane -->
       <div class="tab-pane" id="tab_2">
         <div ng-show="bobot">
-          <div class="col-md-6" ng-repeat="itemkriteria in datas" style="margin-top:12px">
+          <div class="col-md-8" ng-repeat="itemkriteria in datas" style="margin-top:12px">
             <div class="box-header">
               <h4 class="box-title">{{itemkriteria.kriteria}}</h4>
             </div>
@@ -189,10 +189,10 @@
           </div>
           <div class="col-md-12">
             <button class="btn btn-warning" ng-click="checkcr()">Check CR</button>
-            <button class="btn btn-primary" ng-click="simpanbobot()">Simpan</button>
           </div>
         </div>
         <div ng-show="!bobot">
+          
           <div class="col-md-6" ng-repeat="itemkriteria in nilai.datahitung" style="margin-top:12px">
             <div class="box-header">
               <h4 class="box-title">{{itemkriteria.name}}</h4>
@@ -237,7 +237,11 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12">
+            <button ng-show="bobot" class="btn btn-primary" ng-click="simpanbobot()">Simpan</button>
+          </div>
         </div>
+        
       </div>
       <!-- /.tab-pane -->
       <!-- /.tab-pane -->

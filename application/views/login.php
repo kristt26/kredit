@@ -23,8 +23,7 @@
     <?php if($this->session->flashdata('pesan')): ?>
         <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                    <?= $this->session->flashdata('pesan')?>
+                <h4><i class="icon fa fa-ban"></i> <?= $this->session->flashdata('pesan')?></h4>
               </div>
     <?php endif;?>
 

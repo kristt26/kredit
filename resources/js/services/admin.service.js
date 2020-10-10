@@ -281,6 +281,10 @@ function SubKriteriaService($http, $q, helperServices) {
 			data: item
 		}).then(
 			(response) => {
+				var data = service.Items.subkriteria.find(x=>x.idkriteria==item.idkriteria);
+				if(data){
+					data.subkriteria.push(response.data);
+				}
 				def.resolve(response.data);
 			},
 			(err) => {

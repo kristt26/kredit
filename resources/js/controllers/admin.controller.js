@@ -234,7 +234,7 @@
                                 $("#add").modal("hide")
                             })
                         } else {
-                            SubKriteriaService.simpan($scope.model).then((x) => {
+                            SubKriteriaService.post($scope.model).then((x) => {
                                 swal("Proses Berhasil", {
                                     icon: "success",
                                 });
@@ -311,7 +311,7 @@
 
         $scope.simpanbobot = () => {
             SubKriteriaService.simpanbobot($scope.datas).then(x => {
-
+                swal('!information', 'Berhasil Menyimpan', 'success');
             })
         }
 
@@ -354,12 +354,13 @@
                             });
                         });
                         $scope.getcr();
-
+                        
 
                     }
                 } else {
                     $scope.view = 'matriks';
                     $scope.alternatif = x.alternatif;
+                    swal("Information", "Analisa telah dilakukan pada periode aktif, aktifkan periode baru untuk melalukan analisa yang baru", "info");
                 }
             })
 

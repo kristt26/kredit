@@ -71,6 +71,7 @@ class Periode extends CI_Controller
                 $this->Periode_model->update_periode($idperiode, $params);
                 redirect('periode/index');
             } else {
+                $data['data'] = ['title' => 'Periode', 'header' => 'Periode'];
                 $data['_view'] = 'periode/edit';
                 $this->load->view('layouts/main', $data);
             }
